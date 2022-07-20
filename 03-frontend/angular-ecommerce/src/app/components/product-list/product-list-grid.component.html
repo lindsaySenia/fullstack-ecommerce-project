@@ -1,9 +1,12 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
-    
-    <h4>Category: {{ currentCategoryName }}</h4>
+  <!--Displays category name is category is select or Search results if search is performed-->
+    <h4 *ngIf="searchMode; else notSearch">Search Results:</h4>
+    <ng-template #notSearch>
+      <h4>Category: {{ currentCategoryName }}</h4>
+    </ng-template>
     <hr>
-    
+
     <div class="container-fluid">
       <div class="row">
         
