@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
   <!--Displays category name is category is select or Search results if search is performed-->
-    <h4 *ngIf="searchMode; else notSearch">Search Results:</h4>
+    <h4 *ngIf="searchMode; else notSearch">Search Results</h4>
     <ng-template #notSearch>
       <h4>Category: {{ currentCategoryName }}</h4>
     </ng-template>
@@ -13,8 +13,13 @@
         <!-- LOOP OVER THE COLLECTION OF PRODUCTS-->
         <div *ngFor="let tempProduct of products" class="col-md-3">
           <div class="product-box">
-            <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
-            <h1>{{ tempProduct.name }}</h1>
+            
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
+            </a>
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <h1>{{ tempProduct.name }}</h1>
+            </a>
             <div class="price">
               {{ tempProduct.unitPrice | currency: "USD" }}
             </div>
