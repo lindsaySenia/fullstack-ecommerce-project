@@ -760,6 +760,11 @@ a.primary-btn:hover{
   font-weight: bold;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 /* 
  * ----------------------------
  * Footer section
