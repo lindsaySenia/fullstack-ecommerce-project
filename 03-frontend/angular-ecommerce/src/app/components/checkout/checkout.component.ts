@@ -19,8 +19,36 @@ export class CheckoutComponent implements OnInit {
         firstName: [''],
         lastName: [''],
         email: ['']
-      })
-    })
+      }),
+      shippingAddress: this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        zipCode: [''],
+        country: ['']
+      }),
+      billingAddress: this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        zipCode: [''],
+        country: ['']
+      }),
+      creditCard: this.formBuilder.group({
+        cardType: [''],
+        nameOnCard: [''],
+        cardNumber: [''],
+        securityCode: [''],
+        expirationMonth: [''],
+        expirationYear: ['']
+      }),
+    });
+  }
+
+  onSubmit() {
+    console.log("Handling the submit button");
+    console.log(this.checkoutFormGroup.get('customer')?.value);
+    console.log('Email address is: ' + this.checkoutFormGroup.get('customer')?.value.email);
   }
 
 }
