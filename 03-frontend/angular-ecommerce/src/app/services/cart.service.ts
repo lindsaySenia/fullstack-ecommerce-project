@@ -45,6 +45,7 @@ export class CartService {
     
 
   }
+  
   computeCartTotals() {
     
     let totalPriceValue: number = 0;
@@ -63,6 +64,7 @@ export class CartService {
     this.logCartData(totalPriceValue, totalQuantityValue);
 
   }
+
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
     console.log('Contents of the cart');
     for (let tempCartItem of this.cartItems) {
