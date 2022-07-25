@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
+import { FormDropDownService } from 'src/app/services/form-drop-down.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +15,11 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0.00;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) { }
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
+
+  constructor(private formBuilder: FormBuilder, 
+              private formDropDownService: FormDropDownService) { }
 
   ngOnInit(): void {
 
@@ -47,6 +52,29 @@ export class CheckoutComponent implements OnInit {
         expirationYear: ['']
       }),
     });
+
+    // Populate credit card months
+
+    const startMonth: number = new Date().getMonth() + 1;
+    console.log("startMonth: " + startMonth);
+
+    this.formDropDownService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    )
+
+    // Populate credit card years
+
+    this.formDropDownService.getCreditCardYears().subscribe(
+      data => {
+        console.log("Retrieved credit card years: " + JSON.stringify(data));
+        this.creditCardYears = data;
+      }
+    )
+
+
   }
 
   copyShippingAddressToBillingAddress(event) {
