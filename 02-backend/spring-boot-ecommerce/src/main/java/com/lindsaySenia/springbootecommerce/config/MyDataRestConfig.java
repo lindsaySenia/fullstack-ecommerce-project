@@ -1,7 +1,9 @@
 package com.lindsaySenia.springbootecommerce.config;
 
+import com.lindsaySenia.springbootecommerce.entity.Country;
 import com.lindsaySenia.springbootecommerce.entity.Product;
 import com.lindsaySenia.springbootecommerce.entity.ProductCategory;
+import com.lindsaySenia.springbootecommerce.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -33,6 +35,8 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         // disable HTTP methods: PUT, POST and DELETE
         disableHttpMethods(Product.class, config, theUnsupportedActions);
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
+        disableHttpMethods(Country.class, config, theUnsupportedActions);
+        disableHttpMethods(State.class, config, theUnsupportedActions);
 
         // call internal helper method to expose IDs
         exposeIds(config);
