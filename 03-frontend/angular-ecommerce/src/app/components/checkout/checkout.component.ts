@@ -106,6 +106,14 @@ export class CheckoutComponent implements OnInit {
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')?.value);
     console.log('Email address is: ' + this.checkoutFormGroup.get('customer')?.value.email);
+
+    console.log('Shipping address country is: ' + this.checkoutFormGroup.get('shippingAddress')?.value.country.name);
+    console.log('Shipping address state is: ' + this.checkoutFormGroup.get('shippingAddress')?.value.state.name);
+    
+    console.log('Billing address country is: ' + this.checkoutFormGroup.get('billingAddress')?.value.country.name);
+    console.log('Billing address state is: ' + this.checkoutFormGroup.get('billingAddress')?.value.state.name);
+    
+  
   }
 
   handleMonthsAndYears() {
@@ -137,10 +145,10 @@ export class CheckoutComponent implements OnInit {
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
     const countryCode = formGroup?.value.country.code;
-    const countryName = formGroup?.value.country.code;
+    const countryName = formGroup?.value.country.name;
 
-    console.log(`{formGroupName} country code: ${countryCode}`);
-    console.log(`{formGroupName} country code: ${countryName}`);
+    console.log(`${formGroupName} country code: ${countryCode}`);
+    console.log(`${formGroupName} country name: ${countryName}`);
 
     this.formDropDownService.getStates(countryCode).subscribe(
       data => {
