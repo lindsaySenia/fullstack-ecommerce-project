@@ -4,6 +4,7 @@ import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { FormDropDownService } from 'src/app/services/form-drop-down.service';
+import { CustomValidators } from 'src/app/validators/custom-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -32,10 +33,12 @@ export class CheckoutComponent implements OnInit {
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+        firstName: new FormControl('', 
+                            [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhitespace]),
+        lastName: new FormControl('', 
+                            [Validators.required, Validators.minLength(2), CustomValidators.notOnlyWhitespace]),
         email: new FormControl('', 
-                                [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]
+                            [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]
                                // Any combination of letters & numbers, optional period
                                // @
                                // any combination of letters & numbers with period
