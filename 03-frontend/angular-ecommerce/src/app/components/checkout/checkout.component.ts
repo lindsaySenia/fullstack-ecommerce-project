@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
 
   checkoutFormGroup!: FormGroup;
 
-  totalPrice: number = 0.00;
+  totalPrice: number = 0;
   totalQuantity: number = 0;
 
   creditCardYears: number[] = [];
@@ -27,9 +27,12 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
 
   constructor(private formBuilder: FormBuilder, 
-              private formDropDownService: FormDropDownService) { }
+              private formDropDownService: FormDropDownService,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
+
+    this.reviewCartDetails();
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -108,6 +111,20 @@ export class CheckoutComponent implements OnInit {
         console.log("Retrieved countries: " + JSON.stringify(data));
         this.countries = data;
       }
+    );
+
+  }
+
+  reviewCartDetails() {
+  
+    // subscribe to cartService.totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
+    );
+    
+    // subscribe to cartService.totalPrice
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
     );
 
   }
