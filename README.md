@@ -1,4 +1,4 @@
-##Full Stack Ecommerce App
+#Full Stack Ecommerce App
 
 #Tech Stack
 - Angular
