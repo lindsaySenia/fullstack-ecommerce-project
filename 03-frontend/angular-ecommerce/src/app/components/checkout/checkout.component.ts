@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
+import { Order } from 'src/app/common/order';
+import { OrderItem } from 'src/app/common/order-item';
+import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
@@ -179,18 +182,57 @@ export class CheckoutComponent implements OnInit {
       
       // touching all fields triggers display of error messages
       this.checkoutFormGroup.markAllAsTouched();
+      return;
     }
-
-    console.log(this.checkoutFormGroup.get('customer')?.value);
-    console.log('Email address is: ' + this.checkoutFormGroup.get('customer')?.value.email);
-
-    console.log('Shipping address country is: ' + this.checkoutFormGroup.get('shippingAddress')?.value.country.name);
-    console.log('Shipping address state is: ' + this.checkoutFormGroup.get('shippingAddress')?.value.state.name);
-    
-    console.log('Billing address country is: ' + this.checkoutFormGroup.get('billingAddress')?.value.country.name);
-    console.log('Billing address state is: ' + this.checkoutFormGroup.get('billingAddress')?.value.state.name);
-    
+// insert optional new logging here
   
+
+    // set up order
+    let order = new Order;
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+    // get cart items
+    const cartItems = this.cartService.cartItems;
+
+    // create orderItems from cartItems
+    // traditional approach:
+    /*let orderItems: OrderItem[] = [];
+    for (let i=0; i < cartItems.length; i++) {
+      orderItems[i] = new OrderItem(cartItems[i]);
+    }*/
+
+    // improved with mapping
+    // loop over array, apply function to each item and return new array
+    let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
+
+    // set up purchase
+    let purchase = new Purchase();
+
+    // populate purchase - customer
+    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+
+    // populate purchase - shipping address
+    purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
+    const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
+    const shippingCountry: State = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
+    purchase.shippingAddress.state = shippingState.name;
+    purchase.shippingAddress.country = shippingCountry.name;
+
+    // populate purchase - billing address
+    purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
+    const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
+    const billingCountry: State = JSON.parse(JSON.stringify(purchase.billingAddress.country));
+    purchase.billingAddress.state = billingState.name;
+    purchase.billingAddress.country = billingCountry.name;
+
+    // populate purchase - order and orderItems
+    purchase.order = order;
+    purchase.orderItems = orderItems;
+
+    // call REST API via the CheckoutService
+    
+
   }
 
   handleMonthsAndYears() {
