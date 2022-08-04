@@ -231,8 +231,29 @@ export class CheckoutComponent implements OnInit {
     purchase.orderItems = orderItems;
 
     // call REST API via the CheckoutService
-    
+    this.checkoutService.placeOrder(purchase).subscribe({
+        //success
+        next: response => {
+          alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`);
+        
+          // reset cart
+          this.resetCart();
 
+        },
+        //exception
+        error: err => {
+          alert(`There was an error: ${err.message}`);
+        }
+      }
+    );
+
+  }
+  resetCart() {
+    // reset cart data
+
+    // reset form data
+
+    // navigate back to the products page
   }
 
   handleMonthsAndYears() {
