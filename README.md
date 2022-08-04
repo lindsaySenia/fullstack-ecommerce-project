@@ -1,7 +1,19 @@
-#Release 1.0 of eCommerce Full Stack Application
+##Full Stack Ecommerce App
 
-- Product List Table
-- Connectivity between:
-    - Angular
-    - Spring Boot
-    - MySQL database 
+#Tech Stack
+- Angular
+- Spring Boot
+- MySQL
+
+#Release 2.0 
+
+- Add products to shopping cart (CRUD)
+    - Cart review
+- Shopping cart checkout 
+    - Checkout form
+    - Save order to database
+
+#Release 1.0
+
+- Show a list of products
+    - Retrieved from database
