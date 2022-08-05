@@ -19,8 +19,30 @@ export class LoginStatusComponent implements OnInit {
 
     // Subscribe to authenticaiton state changes
     this.oktaAuthService.authState$.subscribe(
-
+      (result) => {
+        this.isAuthenticated = result.isAuthenticated!;
+        this.getUserDetails();
+      }
     )
+  }
+  getUserDetails() {
+
+    if (this.isAuthenticated) {
+
+      // Fetch the logged in user details (user's claims)
+      //
+      // user full name is exposed as a property name
+      this.oktaAuth.getUser().then(
+        (res) => {
+          this.userFullName = res.name!;
+        }
+      );
+    }
+  }
+
+  logout() {
+    // Terminates the session with Okta and removes current tokens.
+    this.oktaAuth.signOut();
   }
 
 }
