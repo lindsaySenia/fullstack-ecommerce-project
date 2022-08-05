@@ -22,7 +22,13 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+
+      "okta": ["./node_modules/@okta/okta-signin-widget/types/packages/@okta/courage-dist/types/index.d.ts"],
+  
+    },
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
