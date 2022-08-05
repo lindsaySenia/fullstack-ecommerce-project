@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js'
 
 @Component({
@@ -11,9 +12,15 @@ export class LoginStatusComponent implements OnInit {
   isAuthenticated: boolean = false;
   userFullName!: string;
 
-  constructor(private oktaAuth: OktaAuth) { }
+  constructor(private oktaAuthService: OktaAuthStateService,
+    @Inject(OKTA_AUTH) private oktaAuth: OktaAuth) { }
 
   ngOnInit(): void {
+
+    // Subscribe to authenticaiton state changes
+    this.oktaAuthService.authState$.subscribe(
+
+    )
   }
 
 }
