@@ -34,7 +34,7 @@ const oktaConfig = Object.assign({
     // Redirect the user to your custom login page
     router.navigate(['/login']);
   }
-});
+}, myAppConfig.oidc);
 
 const routes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
