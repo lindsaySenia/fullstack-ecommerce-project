@@ -39,7 +39,7 @@ function onAuthRequired(oktaAuth, injector) {
 
 
 const routes: Routes = [
-  {path: 'members', component: MembersPageComponent, canActivate: [ OktaAuthGuard]},
+  {path: 'members', component: MembersPageComponent, canActivate: [ OktaAuthGuard], data: {onAuthRequired: onAuthRequired}},
 
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginComponent},
