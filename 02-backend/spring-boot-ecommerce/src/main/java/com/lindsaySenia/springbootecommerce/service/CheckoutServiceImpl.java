@@ -53,7 +53,7 @@ public class CheckoutServiceImpl implements CheckoutService {
             // if found ... assign
             customer = customerFromDB;
         }
-        
+
         customer.add(order);
 
         // save to the database
