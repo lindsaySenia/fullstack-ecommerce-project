@@ -11,5 +11,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     // Page is a sublist of a list of items
-    Page<Order> findByCustomerEmail(@Param("email") String email, Pageable pageable);
+    // add OrderByDateCreatedDesc
+    Page<Order> findByCustomerEmailOrderByDateCreatedDesc(@Param("email") String email, Pageable pageable);
 }
