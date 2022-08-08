@@ -40,10 +40,12 @@ function onAuthRequired(oktaAuth, injector) {
 
 
 const routes: Routes = [
+  {path: 'order-history', component: OrderHistoryComponent, canActivate: [ OktaAuthGuard], data: {onAuthRequired: onAuthRequired}},
   {path: 'members', component: MembersPageComponent, canActivate: [ OktaAuthGuard], data: {onAuthRequired: onAuthRequired}},
 
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginComponent},
+
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
