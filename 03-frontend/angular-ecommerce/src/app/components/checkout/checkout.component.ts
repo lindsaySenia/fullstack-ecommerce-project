@@ -57,7 +57,7 @@ export class CheckoutComponent implements OnInit {
                             Validators.minLength(2), 
                             CustomValidators.notOnlyWhitespace]),
         email: new FormControl(theEmail, 
-                            [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]
+                            [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]
                                // Any combination of letters & numbers, optional period
                                // @
                                // any combination of letters & numbers with period

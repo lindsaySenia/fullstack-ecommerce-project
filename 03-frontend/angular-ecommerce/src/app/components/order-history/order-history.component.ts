@@ -29,6 +29,7 @@ export class OrderHistoryComponent implements OnInit {
         this.orderHistoryList = data._embedded.orders;
       }
     )
+
   }
 
 }
